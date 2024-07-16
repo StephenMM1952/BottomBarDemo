@@ -20,7 +20,10 @@ import com.example.bottombardemo.ui.theme.Red_600
 import com.example.bottombardemo.ui.theme.Red_700
 
 @Composable
-fun Home() {
+fun Home(
+    clueCount: Int,
+    clueList: List<String>,
+) {
 
     Box(
         modifier = Modifier.fillMaxSize()

@@ -27,8 +27,10 @@ import androidx.compose.ui.unit.sp
 import com.example.bottombardemo.screens.Contacts
 import com.example.bottombardemo.screens.Favorites
 import com.example.bottombardemo.screens.Home
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 import com.example.bottombardemo.ui.theme.BottomBarDemoTheme
+import com.example.bottombardemo.viewmodels.HomeViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,7 +86,7 @@ fun NavigationHost(navController: NavHostController) {
         startDestination = NavRoutes.Home.route,
     ) {
         composable(NavRoutes.Home.route) {
-            Home()
+            HomeSetup()
         }
 
         composable(NavRoutes.Contacts.route) {
@@ -95,6 +97,13 @@ fun NavigationHost(navController: NavHostController) {
             Favorites()
         }
     }
+}
+
+@Composable
+fun HomeSetup(viewModel: HomeViewModel = viewModel()) {
+    Home(clueCount = viewModel.clueCount,
+        clueList = viewModel.clueList)
+
 }
 
 @Composable
