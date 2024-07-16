@@ -53,17 +53,26 @@ fun MainScreen() {
     val navController = rememberNavController()
 
     Scaffold(
-        topBar = { Text("Wordle Search",
-            fontSize = 36.sp,
-            fontWeight = FontWeight.Medium,
-            fontFamily = FontFamily.SansSerif,
-            modifier = Modifier.fillMaxWidth().padding(8.dp),
-            textAlign = TextAlign.Center)},
+        topBar = {
+            Text(
+                "Wordle Search",
+                fontSize = 36.sp,
+                fontWeight = FontWeight.Medium,
+                fontFamily = FontFamily.SansSerif,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp, 16.dp),
+                textAlign = TextAlign.Center
+            )
+        },
         content = { padding ->
             Column(Modifier.padding(padding)) {
                 NavigationHost(navController = navController)
-            } },
-        bottomBar = { BottomNavigationBar(navController = navController)}
+            }
+        },
+        bottomBar = {
+            BottomNavigationBar(navController = navController)
+        }
     )
 }
 
@@ -110,8 +119,10 @@ fun BottomNavigationBar(navController: NavHostController) {
                 },
 
                 icon = {
-                    Icon(imageVector = navItem.image,
-                        contentDescription = navItem.title)
+                    Icon(
+                        imageVector = navItem.image,
+                        contentDescription = navItem.title
+                    )
                 },
                 label = {
                     Text(text = navItem.title)
