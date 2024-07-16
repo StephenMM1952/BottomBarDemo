@@ -16,7 +16,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.NavHostController
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 import com.example.bottombardemo.screens.Contacts
 import com.example.bottombardemo.screens.Favorites
@@ -47,7 +53,12 @@ fun MainScreen() {
     val navController = rememberNavController()
 
     Scaffold(
-        topBar = { TopAppBar(title = {Text("Bottom Navigation Demo")})  },
+        topBar = { Text("Wordle Search",
+            fontSize = 36.sp,
+            fontWeight = FontWeight.Medium,
+            fontFamily = FontFamily.SansSerif,
+            modifier = Modifier.fillMaxWidth().padding(8.dp),
+            textAlign = TextAlign.Center)},
         content = { padding ->
             Column(Modifier.padding(padding)) {
                 NavigationHost(navController = navController)
