@@ -6,24 +6,30 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel(): ViewModel() {
+class HomeViewModel : ViewModel() {
     var clueCount by mutableIntStateOf(1)
-    var clueList by mutableStateOf(listOf("ADIEU"))
+    var clueWordList by mutableStateOf(listOf("ADIEU"))
+    var clueStatusList by mutableStateOf(listOf("BBBBB"))
 
-    fun addClue(newClue: String){
+    fun addClue(newClueWord: String, newClueStatus: String){
         clueCount++
-        clueList = clueList + newClue
+        clueWordList = clueWordList + newClueWord
+        clueStatusList = clueStatusList + newClueStatus
     }
-    fun removeClue(index: Int){
-        clueCount--
-        clueList = clueList.filterIndexed { i, _ -> i != index }
-    }
-    fun clearClues(){
-        clueCount = 0
-        clueList = emptyList()
-    }
-    fun reset(){
-        clueCount = 1
-        clueList = listOf("ADIEU")
-    }
+//    fun removeClue(index: Int){
+//        clueCount--
+//        clueWordList = clueWordList.filterIndexed { i, _ -> i != index }
+//        clueStatusList = clueStatusList.filterIndexed { i, _ -> i != index }
+//    }
+//    fun clearClues(){
+//        clueCount = 0
+//        clueWordList = emptyList()
+//        clueStatusList = emptyList()
+//    }
+//    fun reset(){
+//        clueCount = 1
+//        clueWordList = listOf("ADIEU")
+//        clueStatusList = listOf("BBBBB")
+//    }
 }
+

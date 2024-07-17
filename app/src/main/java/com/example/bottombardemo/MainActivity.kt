@@ -49,7 +49,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
@@ -103,8 +102,8 @@ fun NavigationHost(navController: NavHostController) {
 fun HomeSetup(viewModel: HomeViewModel = viewModel()) {
     Home(viewModel = viewModel,
         clueCount = viewModel.clueCount,
-        clueList = viewModel.clueList)
-
+        clueWordList = viewModel.clueWordList,
+        clueStatusList = viewModel.clueStatusList)
 }
 
 @Composable
