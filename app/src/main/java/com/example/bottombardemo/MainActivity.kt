@@ -101,7 +101,8 @@ fun NavigationHost(navController: NavHostController) {
 
 @Composable
 fun HomeSetup(viewModel: HomeViewModel = viewModel()) {
-    Home(clueCount = viewModel.clueCount,
+    Home(viewModel = viewModel,
+        clueCount = viewModel.clueCount,
         clueList = viewModel.clueList)
 
 }

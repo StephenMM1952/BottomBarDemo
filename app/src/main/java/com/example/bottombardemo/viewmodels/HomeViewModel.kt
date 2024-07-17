@@ -26,6 +26,4 @@ class HomeViewModel(): ViewModel() {
         clueCount = 1
         clueList = listOf("ADIEU")
     }
-
-
 }
