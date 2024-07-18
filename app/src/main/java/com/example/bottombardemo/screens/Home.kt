@@ -10,38 +10,55 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.bottombardemo.ui.theme.Green_900
 import com.example.bottombardemo.ui.theme.Grey_200
+import com.example.bottombardemo.ui.theme.Grey_400
+import com.example.bottombardemo.ui.theme.Grey_600
+import com.example.bottombardemo.ui.theme.Grey_700
+import com.example.bottombardemo.ui.theme.Grey_800
+import com.example.bottombardemo.ui.theme.Grey_900
+import com.example.bottombardemo.ui.theme.White
+import com.example.bottombardemo.ui.theme.Yellow_900
 import com.example.bottombardemo.viewmodels.HomeViewModel
+import kotlinx.coroutines.coroutineScope
+
+val clueColorMap = mapOf("B" to Grey_700, "G" to Green_900, "Y" to Yellow_900)
 
 @Composable
-fun Home(
-    viewModel: HomeViewModel,
-    clueCount: Int,
-    clueWordList: List<String>,
-    clueStatusList: List<String>
-) {
+fun Home(viewModel: HomeViewModel = viewModel()) {
+//    val viewModel: HomeViewModel,
+    var clueCount = viewModel.clueCount
+    var clueWordList = viewModel.clueWordList
+    var clueStatusList = viewModel.clueStatusList
+
     val clueListState = rememberLazyListState()
     var typedClueText by remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
-
-    Log.d("Home", "clueCount: $clueCount,\nclueWordList: $clueWordList, \nclueStatusList: $clueStatusList \n") // Debug
 
     Column(
         modifier = Modifier
@@ -50,14 +67,61 @@ fun Home(
             .background(color = Grey_200),
         verticalArrangement = Arrangement.Top
     ) {
-        LazyColumn(state = clueListState) {
+
+        LazyColumn(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxHeight(.75f)
+                .background(color = Grey_200),
+            state = clueListState,
+            verticalArrangement = Arrangement.Bottom
+        ) {
+
             items(clueCount) {
-                Text(clueWordList[it] + " " + clueStatusList[it])
+
+                var clueWord = clueWordList[it]
+                var clueStatus = clueStatusList[it]
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                )
+                {
+                    for (c in 0..4) {
+                        Button(
+                            onClick = { viewModel.nextColor(it, c) },
+                            modifier = Modifier
+                                .clip(CircleShape) // Make the button circular
+                                .size(56.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = clueColorMap.getValue(clueStatus[c].toString()),
+                                contentColor = White
+                            )
+                        )
+                        {
+                            Text(
+                                text = clueWord[c].toString(),
+                                fontSize = 20.sp
+                            )
+                        }
+
+                    }
+                }
             }
         }
-        Spacer(modifier = Modifier.height(16.dp))
+        val scrollKey = clueCount - 1
+        LaunchedEffect(key1 = scrollKey) {
+            clueListState.animateScrollToItem(index = scrollKey)
+        }
+
+        Spacer(modifier = Modifier.height(32.dp))
+        Text(text = "Total number of Clues = $clueCount")
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
@@ -71,17 +135,17 @@ fun Home(
             )
             Button(onClick = {
                 keyboardController?.hide()
-                viewModel.addClue(typedClueText,"BBBBB")
+                viewModel.addClue(typedClueText, "BBBBB")
                 typedClueText = ""
-            }) {
+            }
+            )
+            {
                 Text(text = "Add")
-
             }
         }
-
-
     }
 }
+
 
 //@Composable
 //fun ClueItem(s: String) {

@@ -85,7 +85,7 @@ fun NavigationHost(navController: NavHostController) {
         startDestination = NavRoutes.Home.route,
     ) {
         composable(NavRoutes.Home.route) {
-            HomeSetup()
+            Home()
         }
 
         composable(NavRoutes.Contacts.route) {
@@ -98,13 +98,13 @@ fun NavigationHost(navController: NavHostController) {
     }
 }
 
-@Composable
-fun HomeSetup(viewModel: HomeViewModel = viewModel()) {
-    Home(viewModel = viewModel,
-        clueCount = viewModel.clueCount,
-        clueWordList = viewModel.clueWordList,
-        clueStatusList = viewModel.clueStatusList)
-}
+//@Composable
+//fun HomeSetup(viewModel: HomeViewModel = viewModel()) {
+//    Home(viewModel = viewModel,
+//        clueCount = viewModel.clueCount,
+//        clueWordList = viewModel.clueWordList,
+//        clueStatusList = viewModel.clueStatusList)
+//}
 
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {

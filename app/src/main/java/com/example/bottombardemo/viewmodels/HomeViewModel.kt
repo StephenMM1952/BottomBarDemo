@@ -12,10 +12,30 @@ class HomeViewModel : ViewModel() {
     var clueStatusList by mutableStateOf(listOf("BBBBB"))
 
     fun addClue(newClueWord: String, newClueStatus: String){
+        if(newClueWord.length != 5) return
         clueCount++
         clueWordList = clueWordList + newClueWord
         clueStatusList = clueStatusList + newClueStatus
     }
+
+    fun nextColor(it: Int, c: Int) {
+
+        var clueStatus = clueStatusList[it]
+
+        if (clueStatus[c] == 'B') {
+            clueStatus = clueStatus.replaceRange(c, c + 1, "Y")
+        } else if (clueStatus[c] == 'Y') {
+            clueStatus = clueStatus.replaceRange(c, c + 1, "G")
+        } else {
+            clueStatus = clueStatus.replaceRange(c, c + 1, "B")
+        }
+
+        clueStatusList = clueStatusList.toMutableList().apply {
+            set(it, clueStatus)
+        }
+    }
+
+
 //    fun removeClue(index: Int){
 //        clueCount--
 //        clueWordList = clueWordList.filterIndexed { i, _ -> i != index }
