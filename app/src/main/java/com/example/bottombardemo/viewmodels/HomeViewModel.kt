@@ -40,11 +40,11 @@ class HomeViewModel : ViewModel() {
     }
 
 
-//    fun removeClue(index: Int){
-//        clueCount--
-//        clueWordList = clueWordList.filterIndexed { i, _ -> i != index }
-//        clueStatusList = clueStatusList.filterIndexed { i, _ -> i != index }
-//    }
+    fun removeClue(index: Int){
+        clueCount--
+        clueWordList = clueWordList.filterIndexed { i, _ -> i != index }
+        clueStatusList = clueStatusList.filterIndexed { i, _ -> i != index }
+    }
 //    fun clearClues(){
 //        clueCount = 0
 //        clueWordList = emptyList()

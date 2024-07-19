@@ -20,6 +20,10 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.outlined.Clear
+import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material.icons.twotone.Clear
+import androidx.compose.material.icons.twotone.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -45,13 +49,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-//import com.example.bottombardemo.ui.theme.Blue_300
-//import com.example.bottombardemo.ui.theme.Green_700
-//import com.example.bottombardemo.ui.theme.Grey_700
-//import com.example.bottombardemo.ui.theme.Indigo_900
-//import com.example.bottombardemo.ui.theme.Red_A700
-//import com.example.bottombardemo.ui.theme.White
-//import com.example.bottombardemo.ui.theme.Yellow_900
 import com.example.bottombardemo.ui.theme.*
 import com.example.bottombardemo.viewmodels.HomeViewModel
 
@@ -108,7 +105,7 @@ fun Home(viewModel: HomeViewModel = viewModel()) {
                     )
                     {
                         Icon(
-                            imageVector = Icons.Default.Delete,
+                            imageVector = Icons.TwoTone.Delete,
                             contentDescription = "Delete word from database",
                             modifier = Modifier.size(32.dp),
                             tint = Red_A700
@@ -142,13 +139,13 @@ fun Home(viewModel: HomeViewModel = viewModel()) {
                         }
                     }
                     IconButton(
-                        onClick = { /*TODO*/ },
+                        onClick = { viewModel.removeClue(it)},
                         modifier = Modifier
                             .size(iconContainerSize)
                     )
                     {
                         Icon(
-                            imageVector = Icons.Default.Clear,
+                            imageVector = Icons.TwoTone.Clear,
                             contentDescription = "Clear Clue from list",
                             modifier = Modifier.size(32.dp),
                             tint = Red_A700
