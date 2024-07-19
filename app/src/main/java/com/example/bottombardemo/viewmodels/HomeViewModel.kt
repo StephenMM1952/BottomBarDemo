@@ -13,6 +13,10 @@ class HomeViewModel : ViewModel() {
 
     fun addClue(newClueWord: String, newClueStatus: String){
         if(newClueWord.length != 5) return
+
+        // TODO: validate newClueWord //
+        // TODO: validate newClueStatus //
+
         clueCount++
         clueWordList = clueWordList + newClueWord
         clueStatusList = clueStatusList + newClueStatus

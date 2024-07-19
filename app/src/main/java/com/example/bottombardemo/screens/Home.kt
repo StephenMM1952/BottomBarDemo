@@ -127,7 +127,7 @@ fun Home(viewModel: HomeViewModel = viewModel()) {
                 }
             }
         }
-        val scrollKey = clueCount - 1
+        val scrollKey = clueCount //- 1 // TODO: Fix this //
         LaunchedEffect(key1 = scrollKey) {
             clueListState.animateScrollToItem(index = scrollKey)
         }
