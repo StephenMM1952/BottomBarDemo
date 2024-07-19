@@ -28,6 +28,7 @@ import com.example.bottombardemo.screens.Contacts
 import com.example.bottombardemo.screens.Favorites
 import com.example.bottombardemo.screens.Home
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.bottombardemo.ui.theme.Blue_300
 
 import com.example.bottombardemo.ui.theme.BottomBarDemoTheme
 import com.example.bottombardemo.viewmodels.HomeViewModel
@@ -62,17 +63,19 @@ fun MainScreen() {
                 fontFamily = FontFamily.SansSerif,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp, 16.dp),
+                    .padding(8.dp),
+//                    .padding(8.dp, 16.dp),
                 textAlign = TextAlign.Center
             )
         },
+        bottomBar = {
+            BottomNavigationBar(navController = navController)
+        },
+        containerColor = Blue_300,
         content = { padding ->
             Column(Modifier.padding(padding)) {
                 NavigationHost(navController = navController)
             }
-        },
-        bottomBar = {
-            BottomNavigationBar(navController = navController)
         }
     )
 }
@@ -109,7 +112,7 @@ fun NavigationHost(navController: NavHostController) {
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
 
-    NavigationBar {
+    NavigationBar(containerColor = Blue_300) {
         val backStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = backStackEntry?.destination?.route
 
