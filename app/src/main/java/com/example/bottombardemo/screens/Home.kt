@@ -79,10 +79,9 @@ fun Home(viewModel: HomeViewModel = viewModel()) {
         LazyColumn(
             modifier = Modifier
                 .padding(0.dp)
-                .fillMaxHeight(.8f),
+                .fillMaxHeight(.7f),
 //                .background(color = Grey_200),
-            state = clueListState,
-            verticalArrangement = Arrangement.Bottom
+            state = clueListState, verticalArrangement = Arrangement.Bottom
         ) {
 
             items(clueCount) {
@@ -93,17 +92,13 @@ fun Home(viewModel: HomeViewModel = viewModel()) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(0.dp, 10.dp),
-                    horizontalArrangement = Arrangement.SpaceAround,
+                        .padding(8.dp, 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
-                )
-                {
+                ) {
                     IconButton(
-                        onClick = { /*TODO*/ },
-                        modifier = Modifier
-                            .size(iconContainerSize)
-                    )
-                    {
+                        onClick = { /*TODO*/ }, modifier = Modifier.size(iconContainerSize)
+                    ) {
                         Icon(
                             imageVector = Icons.TwoTone.Delete,
                             contentDescription = "Delete word from database",
@@ -122,8 +117,7 @@ fun Home(viewModel: HomeViewModel = viewModel()) {
                                 containerColor = clueColorMap.getValue(clueStatus[c].toString()),
                                 contentColor = White
                             )
-                        )
-                        {
+                        ) {
                             Box(
                                 modifier = Modifier.fillMaxSize(),
                                 contentAlignment = Alignment.Center
@@ -139,11 +133,9 @@ fun Home(viewModel: HomeViewModel = viewModel()) {
                         }
                     }
                     IconButton(
-                        onClick = { viewModel.removeClue(it)},
-                        modifier = Modifier
-                            .size(iconContainerSize)
-                    )
-                    {
+                        onClick = { viewModel.removeClue(it) },
+                        modifier = Modifier.size(iconContainerSize)
+                    ) {
                         Icon(
                             imageVector = Icons.TwoTone.Clear,
                             contentDescription = "Clear Clue from list",
@@ -160,13 +152,14 @@ fun Home(viewModel: HomeViewModel = viewModel()) {
         }
 
         Spacer(modifier = Modifier.height(32.dp))
+
         HorizontalDivider(thickness = 1.dp)
-//        Text(text = "Total number of Clues = $clueCount")
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceAround,
+                .padding(8.dp, 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
 
@@ -176,7 +169,7 @@ fun Home(viewModel: HomeViewModel = viewModel()) {
                 modifier = Modifier.width(210.dp),
                 label = {
                     Text(
-                        "Type New Clue Here",
+                        "Type New Word Here",
                         color = Indigo_900,
                         fontWeight = FontWeight.Bold,
                         fontSize = 18.sp
@@ -191,50 +184,43 @@ fun Home(viewModel: HomeViewModel = viewModel()) {
                 ),
                 keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters)
             )
-            Button(
-                onClick = {
-                    keyboardController?.hide()
-                    viewModel.addClue(typedClueText, "BBBBB")
-                    typedClueText = ""
-                }
-//                , colors = ButtonColors(
-//                    containerColor = Indigo_900,
-//                    contentColor = Indigo_50,
-//                    disabledContainerColor = Indigo_50,
-//                    disabledContentColor = Indigo_900)
-            )
-            {
-                Text(text = "Add Clue", fontSize = 20.sp, fontWeight = FontWeight.Medium)
-
+            Button(onClick = {
+                keyboardController?.hide()
+                viewModel.addClue(typedClueText, "BBBBB")
+                typedClueText = ""
+            }) {
+                Text(text = "Add Word to Clues", fontSize = 16.sp, fontWeight = FontWeight.Medium)
             }
         }
+
+        HorizontalDivider(thickness = 1.dp)
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp, 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            Button(onClick = { // TODO  //
+            }) {
+                Text(
+                    text = "Add Word to Database", fontSize = 16.sp, fontWeight = FontWeight.Medium
+                )
+            }
+            Button(onClick = { viewModel.reset() }) {
+                Text(
+                    text = "Reset Clue List",
+                    modifier = Modifier.padding(12.dp, 0.dp),
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium
+                )
+            }
+
+        }
+
         HorizontalDivider(thickness = 1.dp)
     }
 }
 
-
-//@Composable
-//fun ClueItem(s: String) {
-//    Text(text = s)
-//}
-//
-//@Composable
-//fun RenderClueItem(c: Clue) {
-//    Row(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(16.dp)
-//    ) {
-//        Button(
-//            onClick = { /*TODO*/ },
-//            modifier = Modifier
-//                .clip(CircleShape) // Make the button circular
-//                .size(56.dp),
-//            colors = ButtonDefaults.buttonColors(containerColor = Grey_200, contentColor = White)
-//        )
-//        {
-//            Text(text = c.word)
-//        }
-//
-//    }
-//}

@@ -39,21 +39,16 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-
     fun removeClue(index: Int){
         clueCount--
         clueWordList = clueWordList.filterIndexed { i, _ -> i != index }
         clueStatusList = clueStatusList.filterIndexed { i, _ -> i != index }
     }
-//    fun clearClues(){
-//        clueCount = 0
-//        clueWordList = emptyList()
-//        clueStatusList = emptyList()
-//    }
-//    fun reset(){
-//        clueCount = 1
-//        clueWordList = listOf("ADIEU")
-//        clueStatusList = listOf("BBBBB")
-//    }
+
+    fun reset(){
+        clueCount = 1
+        clueWordList = listOf("ADIEU")
+        clueStatusList = listOf("BBBBB")
+    }
 }
 
