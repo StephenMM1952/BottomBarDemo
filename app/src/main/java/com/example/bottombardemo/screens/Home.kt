@@ -1,6 +1,5 @@
 package com.example.bottombardemo.screens
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,8 +21,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -37,46 +36,33 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.bottombardemo.ui.theme.Black
-import com.example.bottombardemo.ui.theme.Blue_200
-import com.example.bottombardemo.ui.theme.Blue_300
-import com.example.bottombardemo.ui.theme.Blue_600
-import com.example.bottombardemo.ui.theme.Green_900
-import com.example.bottombardemo.ui.theme.Grey_200
-import com.example.bottombardemo.ui.theme.Grey_400
-import com.example.bottombardemo.ui.theme.Grey_600
-import com.example.bottombardemo.ui.theme.Grey_700
-import com.example.bottombardemo.ui.theme.Grey_800
-import com.example.bottombardemo.ui.theme.Grey_900
-import com.example.bottombardemo.ui.theme.Indigo_50
-import com.example.bottombardemo.ui.theme.Indigo_900
-import com.example.bottombardemo.ui.theme.Red_400
-import com.example.bottombardemo.ui.theme.Red_500
-import com.example.bottombardemo.ui.theme.Red_A700
-import com.example.bottombardemo.ui.theme.White
-import com.example.bottombardemo.ui.theme.Yellow_900
+//import com.example.bottombardemo.ui.theme.Blue_300
+//import com.example.bottombardemo.ui.theme.Green_700
+//import com.example.bottombardemo.ui.theme.Grey_700
+//import com.example.bottombardemo.ui.theme.Indigo_900
+//import com.example.bottombardemo.ui.theme.Red_A700
+//import com.example.bottombardemo.ui.theme.White
+//import com.example.bottombardemo.ui.theme.Yellow_900
+import com.example.bottombardemo.ui.theme.*
 import com.example.bottombardemo.viewmodels.HomeViewModel
-import kotlinx.coroutines.coroutineScope
 
-val clueColorMap = mapOf("B" to Grey_700, "G" to Green_900, "Y" to Yellow_900)
+val clueColorMap = mapOf("B" to Grey_700, "G" to Green_700, "Y" to Yellow_900)
 
 //@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun Home(viewModel: HomeViewModel = viewModel()) {
-    var clueCount = viewModel.clueCount
-    var clueWordList = viewModel.clueWordList
-    var clueStatusList = viewModel.clueStatusList
+    val clueCount = viewModel.clueCount
+    val clueWordList = viewModel.clueWordList
+    val clueStatusList = viewModel.clueStatusList
 
     val clueListState = rememberLazyListState()
     var typedClueText by remember { mutableStateOf("") }
@@ -91,6 +77,7 @@ fun Home(viewModel: HomeViewModel = viewModel()) {
             .background(color = Blue_300),
         verticalArrangement = Arrangement.Top
     ) {
+        HorizontalDivider(thickness = 1.dp)
 
         LazyColumn(
             modifier = Modifier
@@ -103,8 +90,8 @@ fun Home(viewModel: HomeViewModel = viewModel()) {
 
             items(clueCount) {
 
-                var clueWord = clueWordList[it]
-                var clueStatus = clueStatusList[it]
+                val clueWord = clueWordList[it]
+                val clueStatus = clueStatusList[it]
 
                 Row(
                     modifier = Modifier
@@ -176,6 +163,7 @@ fun Home(viewModel: HomeViewModel = viewModel()) {
         }
 
         Spacer(modifier = Modifier.height(32.dp))
+        HorizontalDivider(thickness = 1.dp)
 //        Text(text = "Total number of Clues = $clueCount")
         Row(
             modifier = Modifier
@@ -219,10 +207,11 @@ fun Home(viewModel: HomeViewModel = viewModel()) {
 //                    disabledContentColor = Indigo_900)
             )
             {
-                Text(text = "Add Clue", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text(text = "Add Clue", fontSize = 20.sp, fontWeight = FontWeight.Medium)
 
             }
         }
+        HorizontalDivider(thickness = 1.dp)
     }
 }
 
